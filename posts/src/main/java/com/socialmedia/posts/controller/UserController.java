@@ -22,7 +22,7 @@ public class UserController {
         if(!ObjectUtils.isEmpty(userService.createUser(user)))
             return new ResponseEntity("User Registration successful", HttpStatus.OK);
         else
-            throw new RuntimeException("User Registration successful");
+            throw new RuntimeException("User Registration failed");
     }
 
     @GetMapping("/all")

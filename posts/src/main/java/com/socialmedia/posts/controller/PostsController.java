@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/socialmedia")
 public class PostsController {
     @Autowired
-    PostsService postsService;
+    private PostsService postsService;
 
     @Autowired
-    CustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @GetMapping("/post/{id}")
     public ResponseEntity<PostEntity> getPost(@PathVariable("id") Long postId) {
