@@ -68,7 +68,7 @@ public class PostsControllerIntegrationTest {
 
         when(postsService.getPostByUserId(0, 10)).thenReturn(postPage);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/socialmedia/post/userId")
+        mockMvc.perform(MockMvcRequestBuilders.get("/socialmedia/post/username")
                         .param("pageNo", "0")
                         .param("pageSize", "10")
                         .accept(MediaType.APPLICATION_JSON))
