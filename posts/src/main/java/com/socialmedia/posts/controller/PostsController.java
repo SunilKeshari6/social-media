@@ -24,7 +24,7 @@ public class PostsController {
         return new ResponseEntity<>(postsService.getPost(postId), HttpStatus.OK);
     }
 
-    @GetMapping("/post/userId")
+    @GetMapping("/post/username")
     public ResponseEntity<Page<PostEntity>> getAllPostByUserId(@RequestParam(defaultValue = "0") int pageNo,
                                                             @RequestParam(defaultValue = "10") int pageSize) {
         return new ResponseEntity<>(postsService.getPostByUserId(pageNo, pageSize), HttpStatus.OK);
