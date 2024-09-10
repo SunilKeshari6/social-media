@@ -15,11 +15,6 @@ public class PostsApplication {
 
     }
 
-    @Bean(initMethod="addPosts")
-    public InitialiseDB initialisePosts() {
-        return new InitialiseDB();
-    }
-
     @Bean(initMethod="createAdminAccount")
     public InitialiseDB initialiseAdminAccount() {
         return new InitialiseDB();

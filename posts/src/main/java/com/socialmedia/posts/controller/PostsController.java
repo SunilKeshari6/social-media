@@ -24,7 +24,13 @@ public class PostsController {
         return new ResponseEntity<>(postsService.getPost(postId), HttpStatus.OK);
     }
 
-    @GetMapping("/post")
+    @GetMapping("/post/userId")
+    public ResponseEntity<Page<PostEntity>> getAllPostByUserId(@RequestParam(defaultValue = "0") int pageNo,
+                                                            @RequestParam(defaultValue = "10") int pageSize) {
+        return new ResponseEntity<>(postsService.getPostByUserId(pageNo, pageSize), HttpStatus.OK);
+    }
+
+    @GetMapping("/post/all")
     public ResponseEntity<Page<PostEntity>> getAllPosts(@RequestParam(defaultValue = "0") int pageNo,
                                                        @RequestParam(defaultValue = "10") int pageSize) {
         return new ResponseEntity<>(postsService.getAllPosts(pageNo, pageSize), HttpStatus.OK);
@@ -33,6 +39,12 @@ public class PostsController {
     @PostMapping("/post")
     public ResponseEntity<String> createPost(@RequestBody Post post) {
         postsService.createPost(post);
+        return new ResponseEntity<>("Post created successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/post/random")
+    public ResponseEntity<String> createPost(@RequestParam(defaultValue = "100") int n) {
+        postsService.createRandomPost(n);
         return new ResponseEntity<>("Post created successfully", HttpStatus.OK);
     }
 

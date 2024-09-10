@@ -4,6 +4,7 @@ import com.socialmedia.posts.dao.PostsDAO;
 import com.socialmedia.posts.entity.PostEntity;
 import com.socialmedia.posts.exception.DAOException;
 import com.socialmedia.posts.model.Post;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import static org.mockito.Mockito.*;
@@ -61,7 +63,7 @@ public class PostsServiceTest {
         PostEntity result = postsService.getPost(postId);
 
         verify(postsDAO, times(1)).getPost(postId);
-        Assertions.assertSame(postEntity, result);
+        assertSame(postEntity, result);
     }
 
     @Test
@@ -72,12 +74,22 @@ public class PostsServiceTest {
         try {
             postsService.getPost(postId);
         } catch (DAOException e) {
-            Assertions.assertEquals("Post not Found", e.getMessage());
+            assertEquals("Post not Found", e.getMessage());
         }
 
         verify(postsDAO, times(1)).getPost(postId);
     }
 
+    @Test
+    void testGetPostByUserId() {
+        int pageNo = 0;
+        int pageSize = 10;
+        Page<PostEntity> postEntities = new PageImpl<>(Collections.singletonList(new PostEntity()));
+        when(postsDAO.getPostByUserId(any())).thenReturn(postEntities);
+        Page<PostEntity> result = postsService.getPostByUserId(pageNo, pageSize);
+        assertNotNull(result);
+        assertEquals(postEntities, result);
+    }
     @Test
     public void testGetAllPosts() {
         Pageable pageable = PageRequest.of(0, 10);
@@ -88,16 +100,14 @@ public class PostsServiceTest {
         Page<PostEntity> result = postsService.getAllPosts(0, 10);
 
         verify(postsDAO, times(1)).getAllPosts(pageable);
-        Assertions.assertEquals(page, result);
+        assertEquals(page, result);
     }
 
     @Test
     public void testDeletePost() {
         Long postId = 1L;
         doNothing().when(postsDAO).deletePost(postId);
-
         postsService.deletePost(postId);
-
         verify(postsDAO, times(1)).deletePost(postId);
     }
 }

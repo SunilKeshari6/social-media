@@ -19,13 +19,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public static UserPrincipal userPrincipal;
+
     public UserDetails loadUserByUsername(String username) //throws UsernameNotFoundException {
     {
         Users user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException( "User not found");
         }
-       return new UserPrincipal(user.getUsername(), user.getPassword(), authorities());
+        userPrincipal = new UserPrincipal(user.getUsername(), user.getPassword(), authorities());
+       return userPrincipal;
     }
 
     public Collection<? extends GrantedAuthority> authorities() {
