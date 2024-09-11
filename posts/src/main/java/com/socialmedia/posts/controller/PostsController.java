@@ -4,6 +4,8 @@ import com.socialmedia.posts.entity.PostEntity;
 import com.socialmedia.posts.model.Post;
 import com.socialmedia.posts.service.CustomUserDetailsService;
 import com.socialmedia.posts.service.PostsService;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -37,7 +39,7 @@ public class PostsController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> createPost(@RequestBody Post post) {
+    public ResponseEntity<String> createPost(@Valid @RequestBody Post post) {
         postsService.createPost(post);
         return new ResponseEntity<>("Post created successfully", HttpStatus.OK);
     }
@@ -49,7 +51,7 @@ public class PostsController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<String> updatePost(@PathVariable("id") Long postId, @RequestBody Post post) {
+    public ResponseEntity<String> updatePost(@PathVariable("id") Long postId, @Valid @RequestBody Post post) {
         postsService.updatePost(postId, post);
         return new ResponseEntity<>("Post updated successfully", HttpStatus.OK);
     }
