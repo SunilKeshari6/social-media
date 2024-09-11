@@ -1,7 +1,6 @@
 package com.socialmedia.posts.exception;
 
 import com.socialmedia.posts.model.ErrorCodes;
-import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

@@ -5,9 +5,9 @@ import com.socialmedia.posts.entity.PostEntity;
 import com.socialmedia.posts.exception.DAOException;
 import com.socialmedia.posts.model.Post;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,11 +15,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(SpringExtension.class)
 public class PostsServiceTest {
 
     @Mock
@@ -27,11 +30,6 @@ public class PostsServiceTest {
 
     @InjectMocks
     private PostsService postsService;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     public void testCreatePost() {
