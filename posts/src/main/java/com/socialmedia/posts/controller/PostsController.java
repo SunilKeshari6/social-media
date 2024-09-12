@@ -45,7 +45,7 @@ public class PostsController {
     }
 
     @PostMapping("/post/random")
-    public ResponseEntity<String> createPost(@RequestParam(defaultValue = "100") int n) {
+    public ResponseEntity<String> createRandomPost(@RequestParam(defaultValue = "100") int n) {
         postsService.createRandomPost(n);
         return new ResponseEntity<>("Post created successfully", HttpStatus.OK);
     }
@@ -59,6 +59,12 @@ public class PostsController {
     @DeleteMapping("/post/{id}")
     public ResponseEntity<String> deletePost(@PathVariable("id") Long postId){
         postsService.deletePost(postId);
+        return new ResponseEntity<>("Post deleted successfully", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/post")
+    public ResponseEntity<String> deleteAllPost(){
+        postsService.deleteAllPost();
         return new ResponseEntity<>("Post deleted successfully", HttpStatus.OK);
     }
 }

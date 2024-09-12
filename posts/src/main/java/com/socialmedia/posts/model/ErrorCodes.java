@@ -6,7 +6,6 @@ public enum ErrorCodes {
     VALIDATION_ERROR("2001"),
     INTERNAL_SERVER_ERROR("5001");
 
-
     public final String code;
 
     ErrorCodes(String code) {

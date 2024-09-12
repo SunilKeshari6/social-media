@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -72,6 +71,10 @@ public class PostsDAO {
 
     public void deletePost(Long postId) {
         postsRepository.deleteById(postId);
+    }
+
+    public void deleteAllPost() {
+        postsRepository.deleteAll();
     }
 
     private PostEntity mapToEntity(Post post) {
